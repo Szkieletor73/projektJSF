@@ -1,0 +1,43 @@
+<ui:composition template="/templates/layouts/main.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:define name="title">Projekt JSF - Post Edit</ui:define>
+
+    <ui:define name="content">
+
+		<section class="section">
+			<div class="container">
+				<h:form enctype="multipart/form-data">
+					<div class="field">
+					  <label class="label">Image</label>
+					  <div class="control">
+    					<p:fileUpload class="input" value="#{postEditBB.img}" mode="simple" skinSimple="true" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"/>
+					  </div>
+					</div>
+					<div class="field">
+					  <label class="label">Description</label>
+					  <div class="control">
+						<h:inputTextarea class="input" value="#{postEditBB.description}" />
+					  </div>
+					</div>
+					<div class="field">
+						<h:outputText value="#{post.user.username}" />
+					</div>
+					<h:messages />
+					<h:commandButton class="button is-success" value="Save" action="#{postEditBB.saveData()}"/>
+					<h:button class="button is-danger" value="Cancel" outcome="personList"/>
+				</h:form>
+			</div>
+		</section>
+	
+	</ui:define>
+</ui:composition>
+	
+	
+	
+	
+	

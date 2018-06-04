@@ -1,0 +1,73 @@
+<ui:composition template="/templates/layouts/main.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:define name="title">Projekt JSF</ui:define>
+
+    <ui:define name="content">
+		<f:metadata>
+		    <f:viewParam name="page" value="#{postListBB.page}" />
+		    <f:viewParam name="s" value="#{postListBB.description}" />
+		</f:metadata>
+    
+	    <section class="section">
+			<div class="">
+				<div class="container level">
+					<div class="level-left">
+						<form class="level-item" method="get">
+							<div class="field has-addons">
+							  <input class="control" type="text" name="s" placeholder="Find a post by description" />
+							  <input class="control button is-primary" type="submit" value="Search" />
+							</div>
+						</form>
+						
+						<h:form class="level-item">
+						<h:commandButton class="field button is-success" value="Submit new post"
+							action="#{postListBB.newPost()}" rendered="#{not empty user}" />
+						</h:form>
+					</div>
+				</div>
+	
+				<div class="container">
+						<p:dataTable var="post" value="#{postListBB.list}" rows="10"
+	                         paginator="true"
+	                         paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+	                         rowsPerPageTemplate="5,10,15">
+								<p:column>
+								<div class="level">
+									<div class="level-left">
+										<h:outputText value="#{post.user.username}" /><br />
+									</div>
+									<div class="level-right">
+										<h:form>
+											<h:commandButton class="button is-warning" value="Edit"
+												action="#{postListBB.editPost(post)}" rendered="#{user.role == 1 || user.id == post.user.id}"/>
+										</h:form>
+										<h:form>
+											<h:commandButton class="button is-danger" value="Delete"
+												action="#{postListBB.deletePost(post)}" update="table" rendered="#{user.role == 1 || user.id == post.user.id}" />
+										</h:form>
+									</div>
+								</div>
+									<div class="columns">
+										<div class="column is-8">
+											<figure class="image is-3by2">
+												<h:graphicImage value="/img/#{post.imgPath}" />
+											</figure>
+										</div>
+										<div class="column is-4">
+											<h:outputText value="#{post.description}" />
+										</div>
+									</div>
+								</p:column>
+						</p:dataTable>
+				</div>
+			</div>
+		</section>
+    
+    </ui:define>
+
+</ui:composition>

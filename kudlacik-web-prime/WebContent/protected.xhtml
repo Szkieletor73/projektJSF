@@ -1,0 +1,22 @@
+<ui:composition template="/templates/layouts/main.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:define name="title">Projekt JSF</ui:define>
+
+    <ui:define name="content">
+		<f:metadata>
+		    <f:viewParam name="page" value="#{postListBB.page}" />
+		    <f:viewParam name="s" value="#{postListBB.description}" />
+		</f:metadata>
+    
+	    <section class="section">
+			This is a protected page. You should only be able to get here if you're authenticated with JBoss' internal Security Realm.
+		</section>
+    
+    </ui:define>
+
+</ui:composition>

@@ -1,0 +1,35 @@
+<ui:composition template="/templates/layouts/main.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:define name="title">Projekt JSF - Login</ui:define>
+
+    <ui:define name="content">
+    
+	    <section class="section">
+			<div class="container">
+				<h:form>
+					<div class="field">
+					  <label class="label">Email</label>
+					  <div class="control">
+						<h:inputText class="input" value="#{login.email}" />
+					  </div>
+					</div>
+					<div class="field">
+					  <label class="label">Password</label>
+					  <div class="control">
+						<h:inputSecret class="input" value="#{login.pass}" />
+					  </div>
+					</div>
+					<h:messages />
+					<h:commandButton class="button is-success" value="Submit" action="#{login.doLogin(login.email, login.pass)}"/>
+					<h:button class="button is-warning" value="Return" outcome="personList"/>
+				</h:form>
+			</div>
+		</section>
+    
+    </ui:define>
+
+</ui:composition>
