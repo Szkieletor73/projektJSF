@@ -3,7 +3,8 @@
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core">
+	xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:c="http://java.sun.com/jsp/jstl/core">
 
     <ui:define name="title">Projekt JSF</ui:define>
 
@@ -30,6 +31,12 @@
 						</h:form>
 					</div>
 				</div>
+				<div class="container">
+					<c:forEach items="#{postListBB.list}" var="item" end="10">
+		    			<h:outputText id="item_#{item.getIdpost()}" value="#{item.description}" />
+		    			<br />
+					</c:forEach>
+				</div>
 	
 				<div class="container">
 						<p:dataTable var="post" value="#{postListBB.list}" rows="10"
@@ -44,11 +51,11 @@
 									<div class="level-right">
 										<h:form>
 											<h:commandButton class="button is-warning" value="Edit"
-												action="#{postListBB.editPost(post)}" rendered="#{user.role == 1 || user.id == post.user.id}"/>
+												action="#{postListBB.editPost(post)}" rendered="#{request.isUserInRole('ADMIN') || user.id == post.user.id}"/>
 										</h:form>
 										<h:form>
 											<h:commandButton class="button is-danger" value="Delete"
-												action="#{postListBB.deletePost(post)}" update="table" rendered="#{user.role == 1 || user.id == post.user.id}" />
+												action="#{postListBB.deletePost(post)}" update="table" rendered="#{request.isUserInRole('ADMIN') || user.id == post.user.id}" />
 										</h:form>
 									</div>
 								</div>
